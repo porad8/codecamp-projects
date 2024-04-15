@@ -1,0 +1,50 @@
+body {
+    background-color: rgb(224, 215, 201);
+    font-family: Roboto, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#main {
+    text-align: center;
+}
+
+.desc {
+    padding-bottom: 16px;
+}
+
+#image {
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#img-caption {
+    padding-top: 16px;
+    font-style: italic;
+}
+
+.timeline {
+    text-align: left;
+    margin: 0 auto 40px auto;
+    max-width: 640px;
+    line-height: 1.8;
+}
+
+.quote {
+    font-style: oblique;
+    text-align: left;
+    margin: 0 auto 40px auto;
+    max-width: 600px;
+    line-height: 1.2;
+}
+
+a:visited {
+    color: #a248cc;
+    background-color: rgb(96, 218, 177);
+}
+
+a:hover {
+    color: black;
+    background-color: rgb(58, 58, 180);
+}
