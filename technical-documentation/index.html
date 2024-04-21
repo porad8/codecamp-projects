@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Documentation</title>
+    <link rel="stylesheet" href="styles.css"></link>
+</head>
+<body>
+    <nav id="navbar">
+        <header>Julia Documentation</header>
+        <ul>
+            <li>
+                <a class="nav-link" href="#Introduction">Introduction</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Comparison_to_other_languages">Comparison to other languages</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Advantages_of_Julia">Advantages of Julia</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Assumptions">Assumptions</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Installation_and_getting_started">Installation and getting started</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Variables">Variables</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Numbers">Numbers</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Operators_and_elementary_functions">Operators and elementary functions</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Strings">Strings</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Functions">Functions</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Compound_expressions">Compound expressions</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Conditional_evaluation">Conditional evaluation</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Loops">Loops</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Summary">Summary</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#Reference">Reference</a>
+            </li>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="Introduction">
+            <header>Introduction</header>
+            <p>Welcome to a mini documentation of the Julia Programming Language.</p>
+            <p>In scientific computing, performance and flexibility essential aspects that are achieved with trade-offs which negatively affect performance.</p>
+            <p>Julia is a flexible and dynamic programming language that mainly eliminates these trade-offs. It takes advantage of modern language design and compiler techniques to provide a single environment productive enough for prototyping and efficient enough for deploying performance-intensive applications with performance comparable to that of traditional statically typed languages.</p>
+            <p>Once you understand how Julia works, it is easy to write code that is nearly as fast as C/C++. If you find that something is slow, feel free to consult the Perfomance Tips.</p>
+        </section>
+
+        <section class="main-section" id="Comparison_to_other_languages">
+            <header>Comparison to other languages</header>
+            <p>Julia features optional typing, multiple dispatch, and good performance, achieved using type inference and jist-in-time (JIT) compilation (and optional ahead-of-time compilation), implimented using low level virtual machine (LLVM). It is multi-paradigm, combining features of imperative, functional, and object-oriented programming,providing ease and expressiveness for high-level numerical computing in the same way as R, MATLAB,and Python, while also supporting general programming.</p>
+            <p>The most significant departure from typical dynamic languages are:</p>
+            <ul>
+                <li>The core language imposes very little: Julia Base and the standard library are written in Julia itself, including primitive operations like integer arithmetic.</li>
+                <li>A rich language of types for constructing and describing objects, that can also be used to make type declarations.</li>
+                <li>The ability to define function behavior across many combinations of argument types via multiple dispatch.</li>
+                <li>Automatic generation of efficient, specialized codefor different argument types.</li>
+                <li>Good perfomance, approaching that of statically compiled languages like C.</li>
+            </ul>
+            <p>In Julia, types are are run-time objects and can also be used to convey information to the compiler. That is, Julia combines both aspects of dynamic languages and statically typed languages adding flexibility.</p>
+        </section>
+
+        <section class="main-section" id="Advantages_of_Julia">
+            <header>Advantages of Julia</header>
+            <p>Julia aims to create an unprecedented combination of ease-of-use, power, and efficiency in a single language. In addition to the above, some advantages of Julia over comparable systems include:</p>
+            <ul>
+                <li>Free and open source (MIT licensed)</li>
+                <li>User-defined types are as fast and compact as built-ins</li>
+                <li>No need to vectorize code for perfomance; devectorized code is fast</li>
+                <li>Designed for parallelism and distributed computation</li>
+                <li>Lightweight "green" threading (coroutines)</li>
+                <li>Unobtrusive yet powerful type system</li>
+                <li>Efficient support for Unicode, including but not limited to UTF-8</li>
+            </ul>
+            <p>And many more...</p>
+        </section>
+
+        <section class="main-section" id="Assumptions">
+            <header>Assumptions</header>
+            <p>Before diving into Julia, here are a few assumptions made in reference to the reader:</p>
+            <ul>
+                <li>The reader is comfortable with programming aspects such as variables, loops and functions; previous exposure to another programming language</li>
+                <li>The reader has acces to a computer in which Julia can be installed (see requirements)</li>
+                <li>The reader is comfortable using the command line</li>
+                <li>And finally, the reader has or will commit time for a deeper dive into Julia since this is not a complete documentation.</li>
+            </ul>
+        </section>
+
+        <section class="main-section" id="Installation_and_getting_started">
+            <header>Installation and getting started</header>
+            <p>Julia installation is straightforward.</p>
+            <p>Download and install Julia by following these <a href="https://julialang.org/downloads/">instructions</a></p>
+            <p>The easiest way to learn and experiment with Julia is by starting an interactive session by running <code class="inline-code">julia</code> from the command line (remember to skip the dollar sign):</p>
+            <div class="code">
+                <code>
+                    $ julia
+                </code>
+            </div>
+            <p>To run code in a file non-interactively, you can give it as the first argument to the <code class="inline-code">julia</code> command. For a source file <code class="inline-code">file.jl</code>:</p>
+            <div class="code">
+                <code>$ julia file.jl</code>
+            </div>
+            <p>To evaluate expressions written in a source file <code class="inline-code">file.jl</code>, you have to include them into the shell's scope as follows:</p>
+            <div class="code">
+                <code>include("file.jl")</code>
+            </div>
+            <p>You can use <span class="bold">CTRL-D</span> to exit from the shell or type <code class="inline-code">exit()</code> and press enter.</p>
+            <p>You can also use the interactive shell as a leraning resource by switching into help mode by pressing <span class="bold">?</span> at an empty <code class="inline-code">julia></code> prompt before typing anything else. Typing a keyword and pressing enter will fetch the documentation for it.</p>
+        </section>
+
+        <section class="main-section" id="Variables">
+            <header>Variables</header>
+            <p>A variable, in Julia, is a name associated or bound to a value. It's useful when you want to store a value for later use. For example:</p>
+            <div class="code">
+                <code>
+                    # Assign the value 10 to the variable x <br>
+                    <span class="prompt">julia></span> x = 10 <br>
+                    10 <br>
+                    <br>
+                    # Doing math with x's value <br>
+                    <span class="prompt">julia></span> x + 1 <br>
+                    11 <br>
+                    <br>
+                    # Reassign x's value <br>
+                    <span class="prompt">julia></span> x = 1 + 1 <br>
+                    2 <br>
+                    <br>
+                    # You can assign values of other types, like strings of text <br>
+                    <span class="prompt">julia></span> x = "Hello World!" <br>
+                    "Hello World!" <br>
+                </code>
+            </div>
+            <p>Variable names are case-sensitive and have no semantic meaning (that is, Julia will not treat variable differently based on their names).</p>
+            <p>Unicode names (in UTF-8 encoding) are allowed.</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> δ = 0.00001 <br>
+                    1.0e-5 <br>
+                    <br>
+                    <span class="prompt">julia></span> 안녕하세요 = "Hello" <br>
+                    "Hello" <br>
+                </code>
+            </div>
+            <p>In Julia prompt, Unicode symbols (math and others) can be typed by typing the backlashed LaTeX symbol name followed by tab. For example, the variable name δ can be typed by typing:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> \delta-tab <br>
+                </code>
+            </div>
+            <p>You can also copy paste the symbol in help mode to learn more about it.</p>
+            <p>Variable names must begin with a letter, underscore, or a subset of Unicode points greater than 00A0. Variable names that contain only underscores are immediately discarded after assignment and can't be used later.</p>
+            <p>While Julia imposes few restrictions on valid names, it is useful to adopt the following conventions:</p>
+            <ul>
+                <li>Names of variables are in lowercase.</li>
+                <li>Word separation can be indicated by underscores if the word is hard to read.</li>
+                <li>Names of <code class="inline-code">Types</code> and <code class="inline-code">Modules</code> begin with a capital letter and word separation is shown with upper camel case.</li>
+                <li>Names of <code class="inline-code">functions</code> and <code class="inline-code">macros</code> are in lower case without underscores.</li>
+                <li>Functions that modify their arguments have names that end in <span class="bold">!</span>.</li>
+            </ul>
+            <p>For more information about styling see the <a href="https://docs.julialang.org/en/v1/manual/style-guide/#Style-Guide">Style Guide</a>.</p>
+        </section>
+
+        <section class="main-section" id="Numbers">
+            <header>Numbers</header>
+            <p>Numbers are the basic building blocks of arithmetic and computation. Built in representation of such values are called numeric primitives which include integers and floating-point numbers and representations in code are called numeric literals</p>
+            <p>Julia provides support for  Arbitrary Precision Arithmetic, which can handle operations on numeric values that cannot be represented effectively in native hadware representations, though with relatively slower perfomance.</p>
+            <p>The following are Julia's primitive numeric types:</p>
+            <table class="ints">
+                <caption>Integer types</caption>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Signed</th>
+                        <th>Number of bits</th>
+                        <th>Smallest value</th>
+                        <th>Largest value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Int8</th>
+                        <td>Yes</td>
+                        <td>8</td>
+                        <td>-2^7</td>
+                        <td>2^7 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>UInt8</th>
+                        <td>No</td>
+                        <td>8</td>
+                        <td>0</td>
+                        <td>2^8 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>Int16</th>
+                        <td>Yes</td>
+                        <td>16</td>
+                        <td>-2^15</td>
+                        <td>2^15 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>UInt16</th>
+                        <td>No</td>
+                        <td>16</td>
+                        <td>0</td>
+                        <td>2^16 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>Int32</th>
+                        <td>Yes</td>
+                        <td>32</td>
+                        <td>-2^31</td>
+                        <td>2^31 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>UInt32</th>
+                        <td>No</td>
+                        <td>32</td>
+                        <td>0</td>
+                        <td>2^32 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>Int64</th>
+                        <td>Yes</td>
+                        <td>64</td>
+                        <td>-2^63</td>
+                        <td>2^63 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>UInt64</th>
+                        <td>No</td>
+                        <td>64</td>
+                        <td>0</td>
+                        <td>2^64 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>Int128</th>
+                        <td>Yes</td>
+                        <td>128</td>
+                        <td>-2^127</td>
+                        <td>2^127 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>UInt128</th>
+                        <td>No</td>
+                        <td>128</td>
+                        <td>0</td>
+                        <td>2^128 - 1</td>
+                    </tr>
+                    <tr>
+                        <th>Bool</th>
+                        <td>N/A</td>
+                        <td>8</td>
+                        <td>false (0)</td>
+                        <td>true (1)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="floats">
+                <caption>Floating-point types</caption>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Precision</th>
+                        <th>Number of bits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Float16</th>
+                        <td>half</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <th>Float32</th>
+                        <td>single</td>
+                        <td>32</td>
+                    </tr>
+                    <tr>
+                        <th>Float64</th>
+                        <td>double</td>
+                        <td>64</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Literal integers are represented in the standard manner:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> 1 <br>
+                    1 <br>
+                    <br>
+                    <span class="prompt">julia></span> 1234 <br>
+                    1234 <br>
+                    <br>
+                    # 64-bit system: <br>
+                    <span class="prompt">julia></span> typeof(1234) <br>
+                    Int64 <br>
+                </code>
+            </div>
+            <p>Literal floating point numbers are represented in standard formats, using E-notation when necessary:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> 1.0 <br>
+                    1.0 <br>
+                    <br>
+                    <span class="prompt">julia></span> .5 <br>
+                    0.5 <br>
+                    <br>
+                    <span class="prompt">julia></span> 2.5e-4 <br>
+                    0.00025 <br>
+                    <br>
+                    # 64-bit system: <br>
+                    <span class="prompt">julia></span> typeof(.5) <br>
+                    Float64 <br>
+                </code>
+            </div>
+        </section>
+
+        <section class="main-section" id="Operators_and_elementary_functions">
+            <header>Operators and elementary functions</header>
+            <p>Julia provides a complete collection of arithmetic and bitwise operators across all of its numeric primitive types, as well as providing portable, efficient implimentations of a comprehensive collection of standard mathematical functions.</p>
+            <p>The following are arithmetic operators supported on all numeric types:</p>
+            <table class="arithmetic-ops">
+                <caption>Arithmetic operators ( x and y are variables)</caption>
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>+x</th>
+                        <td>unary plus</td>
+                        <td>the identity operation</td>
+                        <td><code>
+                            <span class="prompt">julia></span> +6 <br>
+                            6 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>-x</th>
+                        <td>unary minus</td>
+                        <td>maps values to their additive inverses</td>
+                        <td><code>
+                            <span class="prompt">julia></span> -6 <br>
+                            -6 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x + y</th>
+                        <td>binary plus</td>
+                        <td>performs addition</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 1 + 2 + 3 <br>
+                            6 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x - y</th>
+                        <td>binary minus</td>
+                        <td>performs subtraction</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 6 - 4 <br>
+                            2 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x * y</th>
+                        <td>times</td>
+                        <td>performs multiplication</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 3 * 2 <br>
+                            6 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x / y</th>
+                        <td>divide</td>
+                        <td>performs division</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 6 / 3 <br>
+                            2 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x ÷ y</th>
+                        <td>integer divide</td>
+                        <td>x/y, truncated to an integer</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 7 ÷ 2 <br>
+                            3 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x \ y</th>
+                        <td>inverse divide</td>
+                        <td>equivalent to y / x</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 4 \ 2 <br>
+                            0.5 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x ^ y</th>
+                        <td>power</td>
+                        <td>raises x to the yth power</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 2^3 <br>
+                            8 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x % y</th>
+                        <td>remainder (modulus)</td>
+                        <td>equivalent to <code>rem(x, y)</code></td>
+                        <td><code>
+                            <span class="prompt">julia></span> 5 % 2 <br>
+                            1 <br>
+                        </code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>The following are boolean operators supported on Bool types:</p>
+            <table class="bool-ops">
+                <caption>Boolean operators</caption>
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>!x</th>
+                        <td>negation</td>
+                    </tr>
+                    <tr>
+                        <th>x && y</th>
+                        <td>short-circuiting and</td>
+                    </tr>
+                    <tr>
+                        <th>x || y</th>
+                        <td>short-circuiting or</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>The following are bitwise operators supported on all primitive integer types:</p>
+            <table class="bit-ops">
+                <caption>Bitwise operators</caption>
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Name</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>~x</th>
+                        <td>bitwise not</td>
+                        <td><code>
+                            <span class="prompt">julia></span> ~123 <br>
+                            -124 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x & y</th>
+                        <td>bitwise and</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 123 & 234 <br>
+                            106 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x | y</th>
+                        <td>bitwise or</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 123 | 234 <br>
+                            251 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x ⊻ y</th>
+                        <td>bitwise xor (exclusive or)</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 123 ⊻ 234 <br>
+                            145 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x ⊼ y</th>
+                        <td>bitwise nand (not and)</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 123 ⊼ 123 <br>
+                            -124 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x ⊽ y</th>
+                        <td>bitwise nor (not or)</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 123 ⊽ 124 <br>
+                            -128 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x >>> y</th>
+                        <td>logical shift right</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 124 >>> 2 <br>
+                            31 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x >> y</th>
+                        <td>arithmetic shift right</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 123 >> 2 <br>
+                            30 <br>
+                        </code></td>
+                    </tr>
+                    <tr>
+                        <th>x << y</th>
+                        <td>logical/arithmetic shift left</td>
+                        <td><code>
+                            <span class="prompt">julia></span> 123 << 2 <br>
+                            492 <br>
+                        </code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Every binary arithmetic and bitwise operator also has an updating operatoe that assigns the result of the operation back into its left opreand. For example:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> x = 1 <br>
+                    1 <br>
+                    <br>
+                    <span class="prompt">julia></span> x += 3 <br>
+                    4 <br>
+                    <br>
+                    <span class="prompt">julia></span> x <br>
+                    4 <br>
+                </code>
+            </div>
+            <p>For a more in-depth coverage of all operators and elementary functions, take a look at the <a href="https://docs.julialang.org/en/v1/manual/mathematical-operations/">documentation</a>.</p>
+        </section>
+
+        <section class="main-section" id="Strings">
+            <header>Strings</header>
+            <p>Strings are finite sequencies of characters. In Julia, the built-in concrete type used for strings is <code class="inline-code">String</code> which supports the full range of Unicode characters via the UTF-8 encoding.</p>
+            <p>String literals are delimited by double quotes or tripple quotes, example:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> str = "Hello,world." <br>
+                    "Hello, world." <br>
+                    <br>
+                    # Breaking long strings: <br>
+                    <span class="prompt">julia></span> "This is a long \ <br>
+                    line" <br>
+                    "This is a long line" <br>
+                    <br>
+                    # String concatenation: <br>
+                    <span class="prompt">julia></span> greet = "Hello" <br>
+                    "Hello" <br>
+                    <span class="prompt">julia></span> whom = "world" <br>
+                    "world" <br>
+                    <span class="prompt">julia></span> string(greet, ", ", whom, ".") <br>
+                    "Hello, world." <br>
+                    <span class="prompt">julia></span> greet * ", " * whom * "." <br>
+                    "Hello, world." <br>
+                    <br>
+                    # Interpolation: <br>
+                    <span class="prompt">julia></span> "$greet, $whom." <br>
+                    "Hello, world." <br>
+                </code>
+            </div>
+            <p>For an in-depth coverage of strings, see the <a href="https://docs.julialang.org/en/v1/manual/strings/">Strings</a> documentation.</p>
+        </section>
+
+        <section class="main-section" id="Functions">
+            <header>Functions</header>
+            <p>In Julia, a function is an object that maps a tuple of argument values to a return value. The basic syntax defination of a function in Julia is:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> <span class="bold">function</span> f(x, y) <br>
+                        x + y <br>
+                    end <br>
+                f (generic function with 1 method) <br>
+                <br>
+                # Using a more terse syntax: <br>
+                <span class="prompt">julia></span> f(x, y) = x + y <br>
+                f (generic function with 1 method) <br>
+                <br>
+                # calling a function: <br>
+                <span class="prompt">julia></span> f(2, 3) <br>
+                5 <br>
+                </code>
+            </div>
+            <p>Functions are first class objects in Julia. For a greater coverage of functions, argument passing behavior, methods, multiple dispatch and many more, see the <a href="https://docs.julialang.org/en/v1/manual/functions/">Functions</a> page in the Julia documentation.</p>
+        </section>
+
+        <section class="main-section" id="Compound_expressions">
+            <header>Compound expressions</header>
+            <p>These have a single expression which evaluates several sub-expressions in order, returning the value of the last subexpression as its value.</p>
+            <p>This is acomplished by using <code class="inline-code">begin</code> blocks and <span class="bold">;</span> chains. Here are some examples:</p>
+            <div class="code">
+                <code>
+                    # begin blocks: <br>
+                    <span class="prompt">julia></span> z = begin <br>
+                        x = 1 <br>
+                        y = 2 <br>
+                        x + y <br>
+                    end <br>
+                    3 <br>
+                    <br>
+                    # ; chains: <br>
+                    <span class="prompt">julia></span> z = (x = 1; y = 2; x + y) <br>
+                    3 <br>
+                </code>
+            </div>
+        </section>
+
+        <section class="main-section" id="Conditional_evaluation">
+            <header>Conditional evaluation</header>
+            <p>Conditional evaluation allows portions of code to beevaluated or not evaluated depending on the value of a boolean expression. Hereis the anatomy of the <code class="inline-code">if-elseif-else</code> conditional syntax:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> if x < y <br>
+                        println("x is less than y") <br>
+                    elseif x > y <br>
+                        println("x is greater than y") <br>
+                    else <br>
+                        println("x is equal to y") <br>
+                    end <br>
+                </code>
+            </div>
+            <p>The ternary operator is closely related to the if-elseif-else syntax used when a conditional choice between single expression values is required. It takes thre operands and it's syntax is <code class="inline-code">a ? b : c</code> where: a is a condition, b is evaluated if a is true and c is evaluated otherwise. The spaces between the operands are mandatory. Here is an example:</p>
+            <div class="code">
+                <code>
+                    <span class="prompt">julia></span> x= 1; y = 2; # no output <br>
+                    <span class="prompt">julia></span> println(x < y ? "less than" : "not less than") <br>
+                    less than <br>
+                </code>
+            </div>
+        </section>
+
+        <section class="main-section" id="Loops">
+            <header>Loops</header>
+            <p>Loops are used for repeated evaluation of expressions. In Julia, there are two constructs used; <code class="inline-code">while</code> and <code class="inline-code">for</code> loops. Here are some examples:</p>
+            <div class="code">
+                <code>
+                    # while loop: <br>
+                    <span class="prompt">julia></span> i = 1; <br>
+                    <span class="prompt">julia></span> while i <= 3 <br>
+                        println(i) <br>
+                        global i += 1 <br>
+                    end <br>
+                    1 <br>
+                    2 <br>
+                    3 <br>
+                    <br>
+                    # for loop: <br>
+                    <span class="prompt">julia></span> for j = 1:3 <br>
+                        println(j) <br>
+                    end <br>
+                    1 <br>
+                    2 <br>
+                    3 <br>
+                    <span class="prompt">julia></span> for i in [1, 3, 7] <br>
+                        println(i) <br>
+                    end <br>
+                    1 <br>
+                    3 <br>
+                    7 <br>
+                </code>
+            </div>
+            <p>For a exhaustive coverage of the above concepts check the <a href="https://docs.julialang.org/en/v1/manual/control-flow/">Control Flow</a> page in the Julia documentation.</p>
+        </section>
+
+        <section class="main-section" id="Summary">
+            <header>Summary</header>
+            <p>The Julia language has a vast range of tools that can be beneficial to the scientific computing communuty as well to general programmer at large.</p>
+            <p>Julia has been used in many fields including the follwing:</p>
+            <ul>
+                <li>Data visualization</li>
+                <li>Data analysis</li>
+                <li>Scientific simulations</li>
+                <li>Web development</li>
+            </ul>
+            <p>See the Julia <a href="https://julialang.org/">Homepage</a> for more applications of Julia.</p>
+        </section>
+
+        <section class="main-section" id="Reference">
+            <header>Reference</header>
+            <p>The above documentation is adapted from the Julia <a href="https://docs.julialang.org/en/v1/">Documentation</a> page. You can browse through the page to learn more about this amazing language.</p>
+        </section>
+    </main>
+</body>
+</html>
